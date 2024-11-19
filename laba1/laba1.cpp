@@ -69,11 +69,50 @@ public:
         return Drobi(chislitel * other.znamenatel, znamenatel * other.chislitel);
     }
 
-    // Перегрузка оператора вывода для дробей(украл из инета, не умею норально перегружать ф-ии)
+    // Перегрузка оператора вывода для дробей
     friend ostream& operator<<(ostream& os, const Drobi& d) {
         os << d.chislitel << "/" << d.znamenatel;
         return os;
     }
+
+    // Перегрузки
+    //// Перегрузка оператора ввода
+    //friend istream& operator>>(istream& is, Drobi& d) {
+    //    char slash; // Для разделения числителя и знаменателя
+    //    is >> d.chislitel >> slash >> d.znamenatel;
+    //    d.Sokratit(); // Упрощаем дробь после ввода
+    //    return is;
+    //}
+
+    //// Перегрузка оператора сложения для дробей
+    //Drobi operator+(const Drobi& other) const {
+    //    return Drobi(chislitel * other.znamenatel + other.chislitel * znamenatel,
+    //        znamenatel * other.znamenatel);
+    //}
+
+    //// Перегрузка оператора сложения для вещественного числа
+    //Drobi operator+(double other) const {
+    //    return *this + Drobi(static_cast<int>(other * znamenatel), znamenatel);
+    //}
+
+    //// Перегрузка оператора вычитания
+    //Drobi operator-(const Drobi& other) const {
+    //    return Drobi(chislitel * other.znamenatel - other.chislitel * znamenatel,
+    //        znamenatel * other.znamenatel);
+    //}
+
+    //// Перегрузка оператора умножения
+    //Drobi operator*(const Drobi& other) const {
+    //    return Drobi(chislitel * other.chislitel, znamenatel * other.znamenatel);
+    //}
+
+    //// Перегрузка оператора деления
+    //Drobi operator/(const Drobi& other) const {
+    //    if (other.chislitel == 0) {
+    //        throw std::invalid_argument("Деление на ноль");
+    //    }
+    //    return Drobi(chislitel * other.znamenatel, znamenatel * other.chislitel);
+    //}
 
     // Метод для ввода дроби
     void Input() {
