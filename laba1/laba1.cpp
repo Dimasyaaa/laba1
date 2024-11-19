@@ -1,8 +1,14 @@
-﻿#include <iostream>
+#include <iostream>
 #include <stdexcept> // для std::invalid_argument
-#include <numeric>   // для std::gcd, если вам нужна поддержка C++17
+#include <cmath>
 
 using namespace std;
+
+//Реализуйте класс обыкновенной дроби.
+// Экземпляр должен поддерживать функционал сложения, вычитания, умножения и деления с другим экземпляром, целым числом, вещественным числом.
+// Операторы инкремента и декремента должны менять числитель дроби.
+// Сократимая дробь должна быть сокращена. Дроби должны быть сравнимы.
+// Экземпляры должны быть выводимы на экран с помощью собственного метода класса и через стандартный поток вывода.
 
 class Drobi {
 private:
@@ -63,7 +69,7 @@ public:
         return Drobi(chislitel * other.znamenatel, znamenatel * other.chislitel);
     }
 
-    // Перегрузка оператора вывода для дробей
+    // Перегрузка оператора вывода для дробей(украл из инета, не умею норально перегружать ф-ии)
     friend ostream& operator<<(ostream& os, const Drobi& d) {
         os << d.chislitel << "/" << d.znamenatel;
         return os;
@@ -81,10 +87,6 @@ public:
         Sokratit();
     }
 
-    // Преобразование простой дроби в целое число
-    double toDouble() const {
-        return static_cast<double>(chislitel) / znamenatel;
-    }
 };
 
 int main() {
@@ -106,19 +108,30 @@ int main() {
         cout << "Частное: " << d1.DrobiDelenie(d2) << endl;
 
         // Операции с обычными числами
-        double number;
-        cout << "Введите обычное число для операций с д1: ";
-        cin >> number;
+        int number1;
+        cout << "Введите обычное число для операций с первой дробью: ";
+        cin >> number1;
 
-        Drobi d_number(static_cast<int>(number), 1); // Преобразуем в дробь
+        Drobi d_number(static_cast<int>(number1), 1); // Преобразуем в дробь
         cout << "Сумма с обычным числом: " << d1.DrobiSum(d_number) << endl;
         cout << "Разность с обычным числом: " << d1.DrobiMinus(d_number) << endl;
         cout << "Произведение с обычным числом: " << d1.DrobiUmnoz(d_number) << endl;
         cout << "Частное с обычным числом: " << d1.DrobiDelenie(d_number) << endl;
 
+        // Операции с вещественными числами
+        double number2;
+        cout << "Введите вещественное число для операций с второй дробью: ";
+        cin >> number2;
+        Drobi d_number_float(static_cast<int>(number2 * 100), 100); // Преобразуем в дробь с двумя десятичными
+        cout << "Сумма с вещественным числом: " << d2.DrobiSum(d_number_float) << endl;
+        cout << "Разность с вещественным числом: " << d2.DrobiMinus(d_number_float) << endl;
+        cout << "Произведение с вещественным числом: " << d2.DrobiUmnoz(d_number_float) << endl;
+        cout << "Частное с вещественным числом: " << d2.DrobiDelenie(d_number_float) << endl;
+
     }
     catch (const exception& e) {
-        cout << e.what() << endl;
+        cerr << "Ошибка: " << e.what() << endl; // для нахождения ошибки(неправильной работы проги) рекомендуют делать :)
     }
+
     return 0;
 }
